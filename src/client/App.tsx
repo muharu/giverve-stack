@@ -1,8 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { api } from "./libs/rpc";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [data, setData] = useState<string>("");
+
+  useEffect(() => {
+    const fetchHello = async () => {
+      const response = await api.hello.$get({
+        query: {
+          name: "Muharu",
+        },
+      });
+      const { message } = await response.json();
+      setData(message);
+    };
+    fetchHello();
+  }, []);
 
   return (
     <>
@@ -28,6 +43,7 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
+        <p>Fetch from backend: {data}</p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
