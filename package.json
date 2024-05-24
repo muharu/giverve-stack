@@ -1,0 +1,35 @@
+{
+  "name": "giverve-stack",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "NODE_ENV=development bunx --bun vite",
+    "build:client": "NODE_ENV=development bunx --bun vite build",
+    "build:server": "NODE_ENV=production bun build src/server/index.ts --target bun --minify --outdir dist/server",
+    "build": "bun run rimraf ./dist && bun run build:client && bun run build:server",
+    "start": "NODE_ENV=production bun run ./dist/server/index.js",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "dependencies": {
+    "hono": "^4.3.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@hono/vite-dev-server": "^0.12.1",
+    "@types/bun": "latest",
+    "@types/node": "^20.12.12",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "rimraf": "^5.0.7",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.11"
+  }
+}
